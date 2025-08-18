@@ -5,17 +5,30 @@
 
 body { 
   background:#fafafa; 
+  margin: 0;
+  font-family: system-ui, sans-serif;
 }
 
 /* Header */
 .tp-header {
   border-bottom: 1px solid #ddd;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gap);
+  background: #fff;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
 
 .tp-title {
   font-weight: 600;
+  margin: 0;
 }
-
 
 .tp-sub { 
   font-size: .95rem; 
@@ -33,20 +46,24 @@ body {
   flex-wrap: wrap; 
 }
 
-/* Container principal */
+/* Container principal em coluna única */
 .tp-container { 
-  display:grid; 
-  grid-template-columns: 1fr 1fr; 
+  display: flex; 
+  flex-direction: column; 
   gap: var(--gap); 
   padding: var(--gap); 
+  max-width: 900px; 
+  margin: 0 auto; 
 }
 
-.tp-left { 
-  min-height: 80vh; 
+.tp-left,
+.tp-right {
+  display: contents; /* deixam de criar colunas próprias */
 }
 
+/* Mapa */
 #map { 
-  height: calc(100vh - 8rem); 
+  height: 60vh; 
   width:100%; 
   border-radius: 12px; 
   box-shadow: var(--shadow); 
@@ -76,9 +93,10 @@ body {
   display:inline-block; 
 }
 
+/* Ferramentas (Relógio + Conversão) */
 .tp-tools { 
   display:grid; 
-  grid-template-columns: 1fr 1fr; 
+  grid-template-columns: 1fr; /* em 1 coluna, pode trocar para 1fr 1fr */
   gap: var(--gap); 
   margin-top: var(--gap); 
 }
@@ -90,20 +108,12 @@ body {
   box-shadow: var(--shadow); 
 }
 
-.tp-right { 
-  display:flex; 
-  flex-direction: column; 
-  gap: var(--gap); 
-}
-
+/* Filtros */
 .tp-controls { 
   background:white; 
   padding:12px; 
   border-radius:12px; 
   box-shadow: var(--shadow); 
-  position: sticky; 
-  top: 68px; 
-  z-index: 10; 
 }
 
 .tp-highlights { 
@@ -191,6 +201,7 @@ body {
   max-height: 320px; 
   overflow: auto; 
   margin-top: 6px; 
+  z-index: 50;
 }
 
 .tp-search-item { 
@@ -230,5 +241,8 @@ body {
   }
   .btn-group button {
     min-width: 40px;
+  }
+  .tp-highlights {
+    grid-template-columns: 1fr; /* stack cards em mobile */
   }
 }
