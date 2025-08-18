@@ -1,0 +1,245 @@
+:root { 
+  --gap: 12px; 
+  --shadow: 0 2px 8px rgba(0,0,0,.06); 
+}
+
+body { 
+  background:#fafafa; 
+}
+
+/* Header */
+.tp-header { 
+  position: sticky; 
+  top: 0; 
+  z-index: 1000; 
+  background: #fff; 
+  box-shadow: var(--shadow);
+  padding: 10px 12px; 
+  display:flex; 
+  align-items:center; 
+  justify-content: space-between; 
+  gap:12px; 
+}
+
+.tp-title { 
+  font-size: 1.25rem; 
+  margin: 0; 
+}
+
+.tp-sub { 
+  font-size: .95rem; 
+  color: #555; 
+  display:flex; 
+  align-items:center; 
+  gap:8px; 
+  flex-wrap:wrap; 
+}
+
+.tp-header-right { 
+  display:flex; 
+  align-items:center; 
+  gap: 8px; 
+  flex-wrap: wrap; 
+}
+
+/* Container principal */
+.tp-container { 
+  display:grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: var(--gap); 
+  padding: var(--gap); 
+}
+
+.tp-left { 
+  min-height: 80vh; 
+}
+
+#map { 
+  height: calc(100vh - 8rem); 
+  width:100%; 
+  border-radius: 12px; 
+  box-shadow: var(--shadow); 
+  background:#eaeaea; 
+}
+
+.tp-legend { 
+  margin-top: 8px; 
+  background: #fff; 
+  border-radius: 10px; 
+  padding: 8px 10px; 
+  box-shadow: var(--shadow); 
+  font-size: .9rem; 
+}
+
+.tp-legend .chip { 
+  display:inline-flex; 
+  align-items:center; 
+  gap:6px; 
+  margin-right:10px; 
+}
+
+.tp-legend .dot { 
+  width:12px; 
+  height:12px; 
+  border-radius:50%; 
+  display:inline-block; 
+}
+
+.tp-tools { 
+  display:grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: var(--gap); 
+  margin-top: var(--gap); 
+}
+
+.tp-tools .card { 
+  background:white; 
+  border-radius:12px; 
+  padding:12px; 
+  box-shadow: var(--shadow); 
+}
+
+.tp-right { 
+  display:flex; 
+  flex-direction: column; 
+  gap: var(--gap); 
+}
+
+.tp-controls { 
+  background:white; 
+  padding:12px; 
+  border-radius:12px; 
+  box-shadow: var(--shadow); 
+  position: sticky; 
+  top: 68px; 
+  z-index: 10; 
+}
+
+.tp-highlights { 
+  display:grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: var(--gap); 
+}
+
+.tp-card { 
+  background:white; 
+  border-radius:12px; 
+  padding:12px; 
+  box-shadow: var(--shadow); 
+}
+
+.tp-agenda { 
+  display:flex; 
+  flex-direction: column; 
+  gap: var(--gap); 
+  padding-bottom: 20px; 
+}
+
+.tp-item { 
+  background:white; 
+  border-left: 4px solid #0d6efd; 
+  border-radius: 10px; 
+  padding: 10px 12px; 
+  box-shadow: 0 1px 6px rgba(0,0,0,.05); 
+}
+
+.tp-item .tp-meta { 
+  font-size:.9rem; 
+  color:#666; 
+  display:flex; 
+  gap:8px; 
+  flex-wrap:wrap; 
+}
+
+.tp-item .tp-title { 
+  font-weight:600; 
+  margin: 4px 0; 
+}
+
+.tp-badges { 
+  display:flex; 
+  gap:6px; 
+  flex-wrap:wrap; 
+}
+
+.badge { 
+  background:#eee; 
+  padding:2px 8px; 
+  border-radius:999px; 
+  font-size:.75rem; 
+}
+
+.tp-actions { 
+  display:flex; 
+  gap:8px; 
+}
+
+.tp-actions a { 
+  font-size:.9rem; 
+}
+
+.tp-empty { 
+  color:#555; 
+  padding: 8px; 
+}
+
+/* Search dropdown */
+.tp-search { 
+  position: relative; 
+}
+
+.tp-search-results { 
+  position: absolute; 
+  top: 100%; 
+  left: 0; 
+  right: 0; 
+  background: #fff; 
+  border: 1px solid #e5e7eb; 
+  border-radius: 8px; 
+  box-shadow: var(--shadow); 
+  max-height: 320px; 
+  overflow: auto; 
+  margin-top: 6px; 
+}
+
+.tp-search-item { 
+  padding: 8px 10px; 
+  cursor: pointer; 
+  display:flex; 
+  flex-direction: column; 
+  gap:4px; 
+}
+
+.tp-search-item:hover { 
+  background: #f5f5f5; 
+}
+
+.tp-search-item .small { 
+  color:#666; 
+  font-size: .85rem; 
+}
+
+/* Cores por tipo (cartões) */
+.tp-item[data-type="Hotel"] { border-left-color:#8b5cf6; }
+.tp-item[data-type="Atração"] { border-left-color:#22c55e; }
+.tp-item[data-type="Aeroporto"] { border-left-color:#ef4444; }
+.tp-item[data-type="Voo"] { border-left-color:#f59e0b; }
+.tp-item[data-type="Restaurante"] { border-left-color:#06b6d4; }
+.tp-item[data-type="Transporte"] { border-left-color:#475569; }
+.tp-item[data-type="Sugestao"] { border-left-color:#9ca3af; }
+
+/* Responsivo */
+@media (max-width: 991px) {
+  .tp-container { 
+    grid-template-columns: 1fr; 
+  }
+  #map { 
+    height: 50vh; 
+  }
+  .tp-highlights { 
+    grid-template-columns: 1fr; 
+  }
+  .tp-tools { 
+    grid-template-columns: 1fr; 
+  }
+}
