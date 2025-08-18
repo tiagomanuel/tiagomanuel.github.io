@@ -1,5 +1,5 @@
 ---
-title: "Viagem 00"
+title: "Itinerário"
 format:
   html:
     theme: cosmo
@@ -42,38 +42,13 @@ include-in-header:
 </header>
 
 <div class="tp-container">
+  <!-- Coluna ESQUERDA -->
   <div class="tp-left">
     <div id="map"></div>
     <div id="legend" class="tp-legend"></div>
-    <div class="tp-tools">
-      <div class="tp-clock card">
-        <div><strong>Agora</strong></div>
-        <div id="clock-lx">Lisboa: —</div>
-        <div id="clock-bkk">Bangkok: —</div>
-        <small>Nota: horários da agenda consideram fuso do destino.</small>
-      </div>
-      <div class="tp-currency card">
-        <div class="row g-2 align-items-end">
-          <div class="col-6">
-            <label class="form-label">THB</label>
-            <input id="cc-thb" type="number" class="form-control" placeholder="1000">
-          </div>
-          <div class="col-6">
-            <label class="form-label">EUR</label>
-            <input id="cc-eur" type="number" class="form-control" placeholder="25">
-          </div>
-          <div class="col-12 d-flex gap-2">
-            <button id="cc-thb-eur" class="btn btn-sm btn-primary">THB → EUR</button>
-            <button id="cc-eur-thb" class="btn btn-sm btn-outline-primary">EUR → THB</button>
-            <small id="cc-rate" class="text-muted ms-auto">taxa: —</small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="tp-right">
-    <div class="tp-controls">
+    <!-- Filtros movidos para baixo do mapa -->
+    <div class="tp-controls mt-3">
       <div class="row g-2 align-items-end">
         <div class="col-12 col-lg-4">
           <label for="flt-day" class="form-label">Dia</label>
@@ -114,11 +89,42 @@ include-in-header:
         </div>
       </div>
     </div>
+  </div>
 
+  <!-- Coluna DIREITA -->
+  <div class="tp-right">
     <div id="highlights" class="tp-highlights"></div>
     <div id="agenda" class="tp-agenda"></div>
+
+    <!-- Relógio + Conversão -->
+    <div class="tp-tools mt-3">
+      <div class="tp-clock card mb-2">
+        <div><strong>Agora</strong></div>
+        <div id="clock-lx">Lisboa: —</div>
+        <div id="clock-bkk">Bangkok: —</div>
+        <small>Nota: horários da agenda consideram fuso do destino.</small>
+      </div>
+      <div class="tp-currency card">
+        <div class="row g-2 align-items-end">
+          <div class="col-6">
+            <label class="form-label">THB</label>
+            <input id="cc-thb" type="number" class="form-control" placeholder="1000">
+          </div>
+          <div class="col-6">
+            <label class="form-label">EUR</label>
+            <input id="cc-eur" type="number" class="form-control" placeholder="25">
+          </div>
+          <div class="col-12 d-flex gap-2">
+            <button id="cc-thb-eur" class="btn btn-sm btn-primary">THB → EUR</button>
+            <button id="cc-eur-thb" class="btn btn-sm btn-outline-primary">EUR → THB</button>
+            <small id="cc-rate" class="text-muted ms-auto">taxa: —</small>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
