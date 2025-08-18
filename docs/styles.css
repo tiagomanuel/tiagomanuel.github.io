@@ -9,15 +9,17 @@ body {
   font-family: system-ui, sans-serif;
 }
 
-
-/* Header fixo no topo */
+/* Header fixo */
 .tp-header {
-  position: sticky;        /* cola no scroll */
-  top: 0;                  /* encostado ao topo */
-  z-index: 1000;           /* fica acima de mapas e cards */
-  background: #fff;        /* fundo sólido para não ficar transparente */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
   border-bottom: 1px solid #ddd;
-  padding: 0.5rem 0.75rem; /* mais compacto */
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .tp-title {
@@ -26,22 +28,23 @@ body {
 }
 
 .tp-sub { 
-  font-size: .95rem; 
+  font-size: .9rem; 
   color: #555; 
-  display:flex; 
-  align-items:center; 
-  gap:8px; 
-  flex-wrap:wrap; 
 }
 
 .tp-header-right { 
   display:flex; 
   align-items:center; 
-  gap: 8px; 
+  gap: 6px; 
   flex-wrap: wrap; 
 }
 
-/* Container principal em coluna única */
+.tp-header-right .btn { 
+  padding: 0.25rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+/* Container */
 .tp-container { 
   display: flex; 
   flex-direction: column; 
@@ -51,14 +54,9 @@ body {
   margin: 0 auto; 
 }
 
-.tp-left,
-.tp-right {
-  display: contents; /* deixam de criar colunas próprias */
-}
-
 /* Mapa */
 #map { 
-  height: 60vh; 
+  height: 55vh; 
   width:100%; 
   border-radius: 12px; 
   box-shadow: var(--shadow); 
@@ -66,58 +64,16 @@ body {
 }
 
 .tp-legend { 
-  margin-top: 8px; 
+  margin-top: 6px; 
   background: #fff; 
   border-radius: 10px; 
   padding: 8px 10px; 
   box-shadow: var(--shadow); 
-  font-size: .9rem; 
+  font-size: .85rem; 
 }
 
-.tp-legend .chip { 
-  display:inline-flex; 
-  align-items:center; 
-  gap:6px; 
-  margin-right:10px; 
-}
-
-.tp-legend .dot { 
-  width:12px; 
-  height:12px; 
-  border-radius:50%; 
-  display:inline-block; 
-}
-
-/* Ferramentas (Relógio + Conversão) */
-.tp-tools { 
-  display:grid; 
-  grid-template-columns: 1fr; /* em 1 coluna, pode trocar para 1fr 1fr */
-  gap: var(--gap); 
-  margin-top: var(--gap); 
-}
-
-.tp-tools .card { 
-  background:white; 
-  border-radius:12px; 
-  padding:12px; 
-  box-shadow: var(--shadow); 
-}
-
-/* Filtros */
-.tp-controls { 
-  background:white; 
-  padding:12px; 
-  border-radius:12px; 
-  box-shadow: var(--shadow); 
-}
-
-.tp-highlights { 
-  display:grid; 
-  grid-template-columns: 1fr 1fr; 
-  gap: var(--gap); 
-}
-
-.tp-card { 
+/* Filtros e cards */
+.tp-controls, .tp-tools .card, .tp-card, .tp-item {
   background:white; 
   border-radius:12px; 
   padding:12px; 
@@ -128,95 +84,13 @@ body {
   display:flex; 
   flex-direction: column; 
   gap: var(--gap); 
-  padding-bottom: 20px; 
 }
 
+/* Agenda items */
 .tp-item { 
-  background:white; 
   border-left: 4px solid #0d6efd; 
-  border-radius: 10px; 
-  padding: 10px 12px; 
-  box-shadow: 0 1px 6px rgba(0,0,0,.05); 
 }
 
-.tp-item .tp-meta { 
-  font-size:.9rem; 
-  color:#666; 
-  display:flex; 
-  gap:8px; 
-  flex-wrap:wrap; 
-}
-
-.tp-item .tp-title { 
-  font-weight:600; 
-  margin: 4px 0; 
-}
-
-.tp-badges { 
-  display:flex; 
-  gap:6px; 
-  flex-wrap:wrap; 
-}
-
-.badge { 
-  background:#eee; 
-  padding:2px 8px; 
-  border-radius:999px; 
-  font-size:.75rem; 
-}
-
-.tp-actions { 
-  display:flex; 
-  gap:8px; 
-}
-
-.tp-actions a { 
-  font-size:.9rem; 
-}
-
-.tp-empty { 
-  color:#555; 
-  padding: 8px; 
-}
-
-/* Search dropdown */
-.tp-search { 
-  position: relative; 
-}
-
-.tp-search-results { 
-  position: absolute; 
-  top: 100%; 
-  left: 0; 
-  right: 0; 
-  background: #fff; 
-  border: 1px solid #e5e7eb; 
-  border-radius: 8px; 
-  box-shadow: var(--shadow); 
-  max-height: 320px; 
-  overflow: auto; 
-  margin-top: 6px; 
-  z-index: 50;
-}
-
-.tp-search-item { 
-  padding: 8px 10px; 
-  cursor: pointer; 
-  display:flex; 
-  flex-direction: column; 
-  gap:4px; 
-}
-
-.tp-search-item:hover { 
-  background: #f5f5f5; 
-}
-
-.tp-search-item .small { 
-  color:#666; 
-  font-size: .85rem; 
-}
-
-/* Cores por tipo (cartões) */
 .tp-item[data-type="Hotel"] { border-left-color:#8b5cf6; }
 .tp-item[data-type="Atração"] { border-left-color:#22c55e; }
 .tp-item[data-type="Aeroporto"] { border-left-color:#ef4444; }
@@ -225,19 +99,15 @@ body {
 .tp-item[data-type="Transporte"] { border-left-color:#475569; }
 .tp-item[data-type="Sugestao"] { border-left-color:#9ca3af; }
 
-/* Responsivo */
+/* Responsivo iPhone */
 @media (max-width: 576px) {
   .tp-header .tp-title {
-    font-size: 1rem;       /* reduz o tamanho */
+    font-size: 1rem;
   }
   .tp-header .tp-sub {
-    font-size: 0.8rem;     /* info mais discreta */
+    font-size: 0.75rem;
   }
-  .tp-header-right {
-    gap: 4px;
-  }
-  .tp-header-right .btn {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.8rem;
+  #map { 
+    height: 50vh;
   }
 }
