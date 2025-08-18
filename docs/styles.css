@@ -8,23 +8,14 @@ body {
 }
 
 /* Header */
-.tp-header { 
-  position: sticky; 
-  top: 0; 
-  z-index: 1000; 
-  background: #fff; 
-  box-shadow: var(--shadow);
-  padding: 10px 12px; 
-  display:flex; 
-  align-items:center; 
-  justify-content: space-between; 
-  gap:12px; 
+.tp-header {
+  border-bottom: 1px solid #ddd;
 }
 
-.tp-title { 
-  font-size: 1.25rem; 
-  margin: 0; 
+.tp-title {
+  font-weight: 600;
 }
+
 
 .tp-sub { 
   font-size: .95rem; 
@@ -229,17 +220,15 @@ body {
 .tp-item[data-type="Sugestao"] { border-left-color:#9ca3af; }
 
 /* Responsivo */
-@media (max-width: 991px) {
-  .tp-container { 
-    grid-template-columns: 1fr; 
+@media (max-width: 576px) {
+  .tp-header {
+    padding: 0.5rem;
   }
-  #map { 
-    height: 50vh; 
+  .tp-sub {
+    display: block;
+    margin-top: 0.25rem;
   }
-  .tp-highlights { 
-    grid-template-columns: 1fr; 
-  }
-  .tp-tools { 
-    grid-template-columns: 1fr; 
+  .btn-group button {
+    min-width: 40px;
   }
 }
