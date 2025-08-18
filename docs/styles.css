@@ -9,20 +9,15 @@ body {
   font-family: system-ui, sans-serif;
 }
 
-/* Header */
+
+/* Header fixo no topo */
 .tp-header {
+  position: sticky;        /* cola no scroll */
+  top: 0;                  /* encostado ao topo */
+  z-index: 1000;           /* fica acima de mapas e cards */
+  background: #fff;        /* fundo sólido para não ficar transparente */
   border-bottom: 1px solid #ddd;
-  padding: 0.75rem 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--gap);
-  background: #fff;
-  box-shadow: var(--shadow);
-  position: sticky;
-  top: 0;
-  z-index: 20;
+  padding: 0.5rem 0.75rem; /* mais compacto */
 }
 
 .tp-title {
@@ -232,17 +227,17 @@ body {
 
 /* Responsivo */
 @media (max-width: 576px) {
-  .tp-header {
-    padding: 0.5rem;
+  .tp-header .tp-title {
+    font-size: 1rem;       /* reduz o tamanho */
   }
-  .tp-sub {
-    display: block;
-    margin-top: 0.25rem;
+  .tp-header .tp-sub {
+    font-size: 0.8rem;     /* info mais discreta */
   }
-  .btn-group button {
-    min-width: 40px;
+  .tp-header-right {
+    gap: 4px;
   }
-  .tp-highlights {
-    grid-template-columns: 1fr; /* stack cards em mobile */
+  .tp-header-right .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
   }
 }
