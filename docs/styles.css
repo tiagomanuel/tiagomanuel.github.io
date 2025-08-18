@@ -1,5 +1,6 @@
 :root { 
-  --gap: 12px; 
+  --gap: 20px;             /* espaçamento padrão entre elementos */
+  --section-gap: 32px;     /* espaçamento extra entre grandes blocos */
   --shadow: 0 2px 8px rgba(0,0,0,.06); 
 }
 
@@ -54,6 +55,31 @@ body {
   margin: 0 auto; 
 }
 
+/* Agenda */
+.tp-agenda { 
+  display:flex; 
+  flex-direction: column; 
+  gap: var(--gap); 
+  margin-bottom: var(--section-gap); /* espaço extra antes do mapa */
+}
+
+/* Agenda items */
+.tp-item { 
+  background:white; 
+  border-radius:12px; 
+  padding:12px; 
+  box-shadow: var(--shadow); 
+  border-left: 4px solid #0d6efd; 
+}
+
+.tp-item[data-type="Hotel"] { border-left-color:#8b5cf6; }
+.tp-item[data-type="Atração"] { border-left-color:#22c55e; }
+.tp-item[data-type="Aeroporto"] { border-left-color:#ef4444; }
+.tp-item[data-type="Voo"] { border-left-color:#f59e0b; }
+.tp-item[data-type="Restaurante"] { border-left-color:#06b6d4; }
+.tp-item[data-type="Transporte"] { border-left-color:#475569; }
+.tp-item[data-type="Sugestao"] { border-left-color:#9ca3af; }
+
 /* Mapa */
 #map { 
   height: 55vh; 
@@ -73,31 +99,14 @@ body {
 }
 
 /* Filtros e cards */
-.tp-controls, .tp-tools .card, .tp-card, .tp-item {
+.tp-controls, 
+.tp-tools .card, 
+.tp-card { 
   background:white; 
   border-radius:12px; 
-  padding:12px; 
+  padding:16px; 
   box-shadow: var(--shadow); 
 }
-
-.tp-agenda { 
-  display:flex; 
-  flex-direction: column; 
-  gap: var(--gap); 
-}
-
-/* Agenda items */
-.tp-item { 
-  border-left: 4px solid #0d6efd; 
-}
-
-.tp-item[data-type="Hotel"] { border-left-color:#8b5cf6; }
-.tp-item[data-type="Atração"] { border-left-color:#22c55e; }
-.tp-item[data-type="Aeroporto"] { border-left-color:#ef4444; }
-.tp-item[data-type="Voo"] { border-left-color:#f59e0b; }
-.tp-item[data-type="Restaurante"] { border-left-color:#06b6d4; }
-.tp-item[data-type="Transporte"] { border-left-color:#475569; }
-.tp-item[data-type="Sugestao"] { border-left-color:#9ca3af; }
 
 /* Responsivo iPhone */
 @media (max-width: 576px) {
