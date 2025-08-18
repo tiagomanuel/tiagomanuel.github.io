@@ -1,8 +1,8 @@
 [
   {
     "date": "2025-08-22",
-    "time_start": "1899-12-31 10:45:00",
-    "time_end": "1899-12-31 11:45:00",
+    "time_start": "10:45",
+    "time_end": "11:45",
     "title": "Voo Porto → Istambul (TK1450)",
     "type": "Voo",
     "area": null,
@@ -23,8 +23,8 @@
   },
   {
     "date": "2025-08-22",
-    "time_start": "1899-12-31 20:15:00",
-    "time_end": "1899-12-31 09:45:00",
+    "time_start": "20:15",
+    "time_end": "09:45",
     "title": "Voo Istambul → Bangkok (TK64)",
     "type": "Voo",
     "area": null,
@@ -45,7 +45,7 @@
   },
   {
     "date": "2025-08-23",
-    "time_start": "1899-12-31 09:45:00",
+    "time_start": "09:45",
     "time_end": "",
     "title": "Aeroporto Internacional de Suvarnabhumi",
     "type": "Aeroporto",
@@ -67,7 +67,7 @@
   },
   {
     "date": "2025-08-23",
-    "time_start": "1899-12-31 14:00:00",
+    "time_start": "14:00",
     "time_end": "",
     "title": "Check-in Mandarin Hotel",
     "type": "Hotel",
@@ -133,8 +133,8 @@
   },
   {
     "date": "2025-08-24",
-    "time_start": "1899-12-31 07:00:00",
-    "time_end": "1899-12-31 08:00:00",
+    "time_start": "07:00",
+    "time_end": "08:00",
     "title": "Pequeno-almoço",
     "type": "Food",
     "area": "Bangkok",
@@ -155,7 +155,7 @@
   },
   {
     "date": "2025-08-24",
-    "time_start": "1899-12-31 08:30:00",
+    "time_start": "08:30",
     "time_end": "",
     "title": "Grande Palácio",
     "type": "Atração",
@@ -177,7 +177,7 @@
   },
   {
     "date": "2025-08-24",
-    "time_start": "1899-12-31 09:30:00",
+    "time_start": "09:30",
     "time_end": "",
     "title": "Wat Arun",
     "type": "Atração",
@@ -199,8 +199,8 @@
   },
   {
     "date": "2025-08-24",
-    "time_start": "1899-12-31 09:00:00",
-    "time_end": "1899-12-31 11:00:00",
+    "time_start": "09:00",
+    "time_end": "11:00",
     "title": "Visita Wat Pho",
     "type": "Atração",
     "area": "Bangkok",
@@ -287,8 +287,8 @@
   },
   {
     "date": "2025-08-25",
-    "time_start": "1899-12-31 10:00:00",
-    "time_end": "1899-12-31 11:00:00",
+    "time_start": "10:00",
+    "time_end": "11:00",
     "title": "Pequeno-almoço",
     "type": "Food",
     "area": "Bangkok",
@@ -441,8 +441,8 @@
   },
   {
     "date": "2025-08-26",
-    "time_start": "1899-12-31 13:20:00",
-    "time_end": "1899-12-31 14:25:00",
+    "time_start": "13:20",
+    "time_end": "14:25",
     "title": "Flight DMK - URT (Bangkok - Surat Thani)",
     "type": "Voo",
     "area": null,
@@ -463,7 +463,7 @@
   },
   {
     "date": "2025-08-26",
-    "time_start": "1899-12-31 14:25:00",
+    "time_start": "14:25",
     "time_end": "",
     "title": "Arrival at Surat Thani",
     "type": "Aeroporto",
