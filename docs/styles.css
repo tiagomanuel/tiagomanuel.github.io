@@ -1,180 +1,165 @@
 /* === Reset e base === */
-body {
-  font-family: 'Segoe UI', sans-serif;
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
-  color: #333;
+  font-family: system-ui, sans-serif;
+  background: #f5f5f5;
+  color: #222;
 }
 
-/* === Cabeçalho === */
-header {
-  background-color: #fff;
-  border-bottom: 1px solid #ccc;
-  padding: 1rem;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-/* === Filtros === */
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.filters select {
-  padding: 0.5rem;
-  font-size: 1rem;
-}
-
-/* === Conteúdo principal === */
-.content {
-  display: flex;
-  flex-direction: row;
-  height: calc(100vh - 80px);
-  max-width: 1400px;
-  margin: 0 auto;
-  gap: 1rem;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-/* === Agenda (coluna esquerda) === */
-.agenda-container {
-  flex: 0 0 30%;
-  max-width: 420px;
-  background: #fff;
+.site-container {
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
+}
+
+/* Navbar e filtros */
+.navbar, .filters {
+  flex: none;
+}
+
+/* === Content = 2 colunas (desktop) === */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* === Colunas === */
+.col {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+/* Agenda = 30% */
+.agenda-container {
+  width: 30%;
+  min-width: 250px;
+  max-width: 400px;
+  border-right: 1px solid #ccc;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.agenda {
+  flex: 1;
   overflow-y: auto;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
   padding: 1rem;
   box-sizing: border-box;
 }
 
-/* Cartões e cabeçalhos dentro da agenda */
-.agenda h2 {
-  margin-top: 0;
-  font-size: 1.1rem;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 0.25rem;
-}
-
-/* === Cartões === */
-.tp-item {
-  background: #fafafa;
-  border: 1px solid #ddd;
-  border-left: 6px solid #bbb;
-  border-radius: 5px;
-  padding: 0.75rem;
-  margin-bottom: 0.75rem;
-  cursor: pointer;
-  transition: box-shadow 0.2s;
-}
-
-.tp-item:hover {
-  box-shadow: 0 0 8px rgba(0,0,0,0.15);
-}
-
-.tp-meta {
-  font-size: 0.85rem;
-  color: #666;
-  margin-bottom: 0.25rem;
-  display: flex;
-  gap: 0.5rem;
-}
-
-.badge {
-  padding: 2px 6px;
-  border-radius: 4px;
-  color: white;
-  font-size: 0.75rem;
-}
-
-/* Botões de ação nos cartões */
-.btn-group {
-  margin-top: 0.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.btn-group a {
-  background: #eee;
-  padding: 4px 8px;
-  border-radius: 4px;
-  text-decoration: none;
-  font-size: 0.85rem;
-  color: #333;
-  transition: background 0.2s;
-}
-
-.btn-group a:hover {
-  background: #ddd;
-}
-
-/* === Mapa === */
+/* Mapa = 70% */
 .map-container {
-  flex: 1;
-  height: 100%;
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
 }
 
-#map {
+.map {
+  flex: 1;
   width: 100%;
   height: 100%;
 }
 
-/* Legenda no mapa */
-.legend {
-  background: white;
-  padding: 0.5rem;
-  font-size: 0.8rem;
-  border-radius: 4px;
-  line-height: 1.4;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
-}
-
-/* === Mobile === */
+/* === Mobile (até 768px): colunas empilhadas === */
 @media (max-width: 768px) {
   .content {
     flex-direction: column;
-    height: auto;
-    padding: 0.5rem;
   }
 
   .agenda-container {
     width: 100%;
-    height: auto;
-    max-height: none;
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
+    height: 60%;
+    max-height: 60%;
+    overflow-y: auto;
+    margin-bottom: 1rem; /* <<< Espaço adicional entre agenda e mapa */
   }
 
   .map-container {
     width: 100%;
-    height: 60vh; /* altura fixa mais generosa no mobile */
-    max-height: 60vh;
+    height: 40%;
+    max-height: 40%;
   }
 
   .agenda {
-    height: auto;
+    height: 100%;
     overflow-y: auto;
   }
 
-  #map {
+  .map {
     height: 100% !important;
   }
+}
+
+/* === Cartões da agenda === */
+.tp-item {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: #fafafa;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.tp-item h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #0d6efd;
+}
+
+.tp-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.tp-item .time {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.4rem;
+}
+
+.tp-item-notes {
+  margin-top: 8px;
+  background: #f8f9fa;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.tp-item .address,
+.tp-item .phone {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.4rem;
+}
+
+.badge {
+  background: #0d6efd;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
+
+.btn-group {
+  margin-top: 0.6rem;
+}
+
+.btn-group a {
+  margin-right: 6px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  color: #0d6efd;
+}
+
+.btn-group a:hover {
+  text-decoration: underline;
 }
