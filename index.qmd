@@ -7,51 +7,43 @@ format:
     page-layout: full
 include-in-header:
   text: |
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="app.js" defer></script>
 ---
 
 ```{=html}
-<!-- Estilos -->
-<link rel="stylesheet" href="styles.css">
 
-<!-- Leaflet -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-<!-- Conteúdo -->
 <div class="site-container">
 
-  <!-- Cabeçalho com Filtros -->
   <header class="navbar">
     <div class="nav-row">
-      <button id="prev-day">◀ Dia anterior</button>
-      <h1 id="current-day">Itinerário</h1>
-      <button id="next-day">Dia seguinte ▶</button>
+      <button id="prev-day">◀</button>
+      <h1 id="current-day">Guia de Viagem</h1>
+      <button id="next-day">▶</button>
     </div>
     <div class="filters">
-      <select id="filter-type">
-        <option value="">Todas as categorias</option>
-      </select>
-      <select id="filter-area">
-        <option value="">Todas as regiões</option>
-      </select>
+      <label for="filter-type">Tipo:</label>
+      <select id="filter-type" multiple></select>
+      <label for="filter-area">Área:</label>
+      <select id="filter-area" multiple></select>
     </div>
   </header>
 
-<main class="content">
-  <div class="col agenda-container">
-    <div id="agenda" class="agenda"></div>
-  </div>
-  <div class="col map-container">
-    <div id="map" class="map"></div>
-  </div>
-</main>
+  <main class="content">
+    <div class="map-container">
+      <div id="map"></div>
+      <div id="map-legend" class="map-legend"></div>
+    </div>
 
+    <div class="agenda-container">
+      <div id="agenda" class="agenda"></div>
+    </div>
+  </main>
 
 </div>
-
-<!-- JS -->
-<script src="app.js"></script>
 
 ```
 
