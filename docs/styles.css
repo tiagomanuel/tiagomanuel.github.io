@@ -92,15 +92,16 @@ body {
 }
 
 .tp-item {
+  width: 100%;
+  box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 10px;
   margin-bottom: 1rem;
   padding: 1rem;
   background: #fafafa;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  transition: background 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
+
 .tp-item:hover {
   background: #f0f8ff;
 }
