@@ -186,20 +186,24 @@ body {
 @media (max-width: 768px) {
   .content {
     flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
   }
 
   .agenda {
     width: 100%;
-    max-height: 40vh;
+    flex: 1 1 55%;
+    overflow-y: auto;
     border-right: none;
     border-bottom: 1px solid #ddd;
-    margin-bottom: 12px;
-    padding-bottom: 1rem;
+    margin-bottom: 0;
+    padding: 1rem;
   }
 
   .map {
-    flex: 1;
-    min-height: 60vh;
-    padding-top: 0.5rem;
+    flex: 1 1 45%;
+    min-height: 200px;
+    padding: 0;
   }
 }
+
