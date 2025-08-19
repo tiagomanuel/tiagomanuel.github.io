@@ -24,6 +24,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
@@ -40,11 +41,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -71,11 +72,36 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Itinerário</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Início</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
@@ -102,120 +128,40 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<!-- Estilos -->
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-<header class="tp-header">
-  <div class="tp-header-left">
-    <h1 class="tp-title">Smilling Thai Itinerary</h1>
-    <div class="tp-sub">
-      <span class="label">Dia selecionado:</span>
-      <span id="current-day" class="badge bg-primary">—</span>
-      <span class="label">Janela da viagem:</span>
-      <span id="trip-range" class="badge bg-secondary">—</span>
-    </div>
-  </div>
-  <div class="tp-header-right">
-    <div class="btn-group" role="group">
-      <button id="btn-prev" class="btn btn-outline-primary">◀ Dia anterior</button>
-      <button id="btn-next" class="btn btn-outline-primary">Dia seguinte ▶</button>
-    </div>
-    <div class="form-check form-switch mx-3">
-      <input class="form-check-input" type="checkbox" id="sw-all-days">
-      <label class="form-check-label" for="sw-all-days">Mostrar todos os dias</label>
-    </div>
-    <div class="form-check form-switch">
-      <input class="form-check-input" type="checkbox" id="sw-map-filter" checked="">
-      <label class="form-check-label" for="sw-map-filter">Aplicar filtros ao mapa</label>
-    </div>
-  </div>
-</header>
+<!-- Conteúdo -->
+<div class="site-container">
 
-<div class="tp-container">
-  <!-- 1. Destaques -->
-  <div id="highlights" class="tp-highlights"></div>
-
-  <!-- 2. Agenda -->
-  <div id="agenda" class="tp-agenda"></div>
-
-  <!-- 3. Mapa -->
-  <div id="map"></div>
-  <div id="legend" class="tp-legend"></div>
-
-  <!-- 4. Filtros -->
-  <div class="tp-controls mt-3">
-    <div class="row g-2 align-items-end">
-      <div class="col-12 col-lg-4">
-        <label for="flt-day" class="form-label">Dia</label>
-        <input id="flt-day" type="date" class="form-control">
-      </div>
-      <div class="col-12 col-lg-4">
-        <label for="flt-type" class="form-label">Tipo</label>
-        <div class="d-flex gap-2">
-          <select id="flt-type" class="form-select" multiple="">
-            <option value="Hotel">Hotel</option>
-            <option value="Atração">Atração</option>
-            <option value="Aeroporto">Aeroporto</option>
-            <option value="Voo">Voo</option>
-            <option value="Restaurante">Restaurante</option>
-            <option value="Transporte">Transporte</option>
-            <option value="Sugestao">Sugestão</option>
-          </select>
-          <div class="btn-group-vertical">
-            <button id="btn-types-all" class="btn btn-sm btn-outline-secondary">Todos</button>
-            <button id="btn-types-none" class="btn btn-sm btn-outline-secondary">Nenhum</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-lg-4">
-        <label for="flt-area" class="form-label">Área</label>
-        <select id="flt-area" class="form-select">
-          <option value="">Todas</option>
-        </select>
-      </div>
-
-      <!-- Fuzzy Finder -->
-      <div class="col-12">
-        <label class="form-label">Pesquisar (título / notas / código de voo)</label>
-        <div class="tp-search">
-          <input id="flt-q" type="search" class="form-control" placeholder="ex.: 'Wat', 'PG123', 'check-in'…">
-          <div id="search-results" class="tp-search-results" hidden=""></div>
-        </div>
-      </div>
+  <!-- Barra de navegação -->
+  <nav class="navbar">
+    <div class="nav-controls">
+      <button id="prev-day">◀</button>
+      <span id="current-day">Data</span>
+      <button id="next-day">▶</button>
     </div>
-  </div>
+    <div class="nav-filtros">
+      <select id="filter-type" multiple="">
+        <option value="">Todas as categorias</option>
+      </select>
+      <select id="filter-area" multiple="">
+        <option value="">Todas as regiões</option>
+      </select>
+    </div>
+  </nav>
 
-  <!-- 5. Ferramentas -->
-  <div class="tp-tools mt-3">
-    <div class="tp-clock card mb-2">
-      <div><strong>Agora</strong></div>
-      <div id="clock-lx">Lisboa: —</div>
-      <div id="clock-bkk">Bangkok: —</div>
-      <small>Nota: horários da agenda consideram fuso do destino.</small>
-    </div>
-    <div class="tp-currency card">
-      <div class="row g-2 align-items-end">
-        <div class="col-6">
-          <label class="form-label">THB</label>
-          <input id="cc-thb" type="number" class="form-control" placeholder="1000">
-        </div>
-        <div class="col-6">
-          <label class="form-label">EUR</label>
-          <input id="cc-eur" type="number" class="form-control" placeholder="25">
-        </div>
-        <div class="col-12 d-flex gap-2">
-          <button id="cc-thb-eur" class="btn btn-sm btn-primary">THB → EUR</button>
-          <button id="cc-eur-thb" class="btn btn-sm btn-outline-primary">EUR → THB</button>
-          <small id="cc-rate" class="text-muted ms-auto">taxa: —</small>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Conteúdo principal -->
+  <main class="content">
+    <div id="agenda" class="agenda"></div>
+    <div id="map" class="map"></div>
+  </main>
+
 </div>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script type="module" src="app.js"></script>
-
+<script src="app.js"></script>
 
 
 

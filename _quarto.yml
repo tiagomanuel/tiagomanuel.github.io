@@ -2,6 +2,13 @@ project:
   type: website
   output-dir: docs
 
+website:
+  title: "Itinerário"
+  navbar:
+    left:
+      - text: "Início"
+        href: index.qmd
+
 format:
   html:
     theme: cosmo
