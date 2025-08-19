@@ -244,6 +244,13 @@ function renderMap(filtered) {
   }
 }
 
+
+setTimeout(() => {
+  map.invalidateSize();
+}, 300);
+
+
+
 function showDay(date) {
   state.currentDate = date;
   document.getElementById("current-day").textContent = date;

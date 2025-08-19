@@ -1,81 +1,49 @@
-/* === Base === */
+/* === Reset e base === */
 html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  height: 100%;
-  font-family: -apple-system, system-ui, sans-serif;
+  font-family: system-ui, sans-serif;
   background: #f5f5f5;
   color: #222;
 }
 
-/* === Container principal === */
 .site-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
 
-/* === Barra de navegação === */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #0d6efd;
-  color: white;
-  padding: 0.5rem 1rem;
-  flex-shrink: 0;
+/* Navbar e filtros */
+.navbar, .filters {
+  flex: none;
 }
 
-.navbar button {
-  background: white;
-  color: #0d6efd;
-  border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-}
-.navbar button:hover {
-  background: #eaeaea;
-}
-
-/* === Filtros === */
-.filters {
-  display: flex;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: #ffffff;
-  border-bottom: 1px solid #ddd;
-  flex-wrap: wrap;
-}
-.filters select {
-  flex: 1 1 200px;
-  padding: 0.4rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 0.95rem;
-}
-
-/* === Conteúdo principal === */
+/* === Content = 2 colunas (desktop) === */
 .content {
+  flex: 1;
   display: flex;
   flex-direction: row;
-  flex: 1;
   height: 100%;
   overflow: hidden;
 }
 
-/* === Agenda === */
-.agenda-container {
-  flex: 0 0 30%;
-  min-width: 280px;
-  max-width: 420px;
+/* === Colunas === */
+.col {
+  box-sizing: border-box;
   height: 100%;
+}
+
+/* Agenda = 30% */
+.agenda-container {
+  width: 30%;
+  min-width: 250px;
+  max-width: 400px;
+  border-right: 1px solid #ccc;
+  background: #fff;
   display: flex;
   flex-direction: column;
-  background: #fff;
-  border-right: 1px solid #ccc;
 }
 
 .agenda {
@@ -85,69 +53,89 @@ html, body {
   box-sizing: border-box;
 }
 
-.tp-item {
+/* Mapa = 70% */
+.map-container {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.map {
+  flex: 1;
   width: 100%;
+  height: 100%;
+}
+
+/* === Mobile (até 768px): colunas empilhadas === */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .agenda-container,
+  .map-container {
+    width: 100%;
+    height: 50%;
+    max-height: 50%;
+  }
+
+  .agenda {
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .map {
+    height: 100% !important;
+  }
+}
+
+/* === Cartões da agenda === */
+.tp-item {
   border: 1px solid #ddd;
   border-radius: 10px;
   margin-bottom: 1rem;
   padding: 1rem;
   background: #fafafa;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  box-sizing: border-box;
-  transition: box-shadow 0.3s ease;
 }
-.tp-item:hover {
-  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-}
-
 .tp-item h3 {
   margin-top: 0;
   font-size: 1.1rem;
   color: #0d6efd;
 }
-
 .tp-meta {
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
 }
-
-.badge {
-  padding: 3px 6px;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  color: #fff;
-  font-weight: 500;
-}
-
-.area {
-  font-size: 0.8rem;
-  color: #444;
-}
-
-.time {
+.tp-item .time {
   font-weight: 500;
   color: #333;
-  margin: 0.3rem 0;
+  margin-bottom: 0.4rem;
 }
-
 .tp-item-notes {
   margin-top: 8px;
-  background: #f0f2f5;
+  background: #f8f9fa;
   padding: 8px;
   border-radius: 6px;
   font-size: 0.9rem;
 }
-
-.address, .phone {
+.tp-item .address, .tp-item .phone {
   font-size: 0.85rem;
   color: #555;
   margin-top: 0.4rem;
 }
-
+.badge {
+  background: #0d6efd;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+}
 .btn-group {
-  margin-top: 0.8rem;
+  margin-top: 0.6rem;
 }
 .btn-group a {
   margin-right: 6px;
@@ -158,98 +146,3 @@ html, body {
 .btn-group a:hover {
   text-decoration: underline;
 }
-
-/* === Mapa === */
-.map-container {
-  flex: 1;
-  height: 100%;
-  position: relative;
-}
-.map {
-  width: 100%;
-  height: 100%;
-}
-
-/* === Legenda do mapa (Leaflet) === */
-.leaflet-control .legend {
-  background: white;
-  padding: 0.5rem;
-  border-radius: 6px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
-  font-size: 0.85rem;
-}
-.leaflet-control .legend i {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 6px;
-}
-
-/* === Contentores principais === */
-.content {
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  height: calc(100vh - 100px); /* ajusta conforme navbar+filtros */
-  overflow: hidden;
-}
-
-/* Desktop: lado a lado */
-.agenda-container {
-  flex: 0 0 30%;
-  min-width: 280px;
-  max-width: 420px;
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid #ccc;
-  height: 100%;
-}
-.map-container {
-  flex: 1;
-  height: 100%;
-}
-
-.agenda {
-  flex: 1;
-  overflow-y: auto;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-.map {
-  width: 100%;
-  height: 100%;
-}
-
-/* Mobile: empilhados verticalmente */
-@media (max-width: 768px) {
-  .content {
-    flex-direction: column;
-    height: calc(100vh - 110px); /* ajusta conforme navbar+filtros */
-  }
-
-  .agenda-container {
-    flex: 0 0 55%;
-    height: 55%;
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid #ccc;
-  }
-
-  .map-container {
-    flex: 0 0 45%;
-    height: 45%;
-    width: 100%;
-  }
-
-  .agenda {
-    height: 100%;
-    overflow-y: auto;
-    padding: 1rem;
-  }
-
-  .map {
-    height: 100%;
-  }
-}
-
