@@ -178,8 +178,12 @@ function renderAgenda(filtered) {
 let map, layerGroup;
 
 function initMap() {
-  map = L.map("map").setView([38.7169, -9.139], 12);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+  map = L.map("map");
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+    attribution: '&copy; <a href="https://carto.com/">CARTO</a> | <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
   layerGroup = L.layerGroup().addTo(map);
 }
 
@@ -242,14 +246,11 @@ function renderMap(filtered) {
     legend.addTo(map);
     map.legendControl = legend;
   }
+
+  setTimeout(() => {
+    map.invalidateSize();
+  }, 300);
 }
-
-
-setTimeout(() => {
-  map.invalidateSize();
-}, 300);
-
-
 
 function showDay(date) {
   state.currentDate = date;
