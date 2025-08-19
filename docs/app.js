@@ -1,8 +1,24 @@
+// === app.js ===
+
 let state = {
   data: [],
   currentDate: null,
   filters: { type: [], area: [] }
 };
+
+const tipoCores = {
+  "Atração": "#2E86AB",
+  "Restaurante": "#DA4167",
+  "Hotel": "#00A676",
+  "Transporte": "#FF914D",
+  "Voo": "#BC5090",
+  "Sugestão": "#888",
+  "Outro": "#555"
+};
+
+function corParaTipo(tipo) {
+  return tipoCores[tipo] || "#888";
+}
 
 async function carregarDados() {
   const resp = await fetch("data.json");
@@ -65,7 +81,7 @@ function criarCard(item) {
     <h3>${item.title || "(sem título)"}</h3>
 
     <div class="tp-meta">
-      ${item.type ? `<span class="badge">${item.type}</span>` : ""}
+      ${item.type ? `<span class="badge" style="background:${corParaTipo(item.type)};">${item.type}</span>` : ""}
       ${item.area ? `<span class="area">${item.area}</span>` : ""}
     </div>
 
@@ -79,7 +95,7 @@ function criarCard(item) {
     <div class="btn-group">
       ${item.lat && item.lon ? `<a href="https://www.google.com/maps?q=${item.lat},${item.lon}" target="_blank">🌍 Ver no Maps</a>` : ""}
       ${(item.lat_from && item.lon_from && item.lat_to && item.lon_to) ?
-        `<a href="https://www.google.com/maps/dir/?api=1&origin=${item.lat_from},${item.lon_from}&destination=${item.lat_to},${item.lon_to}" target="_blank">🛣️ Itinerário</a>` : ""}
+        `<a href="https://www.google.com/maps/dir/?api=1&origin=${item.lat_from},${item.lon_from}&destination=${item.lat_to},${item.lon_to}" target="_blank">🚣 Itinerário</a>` : ""}
       ${item.url ? `<a href="${item.url}" target="_blank">🔗 Website</a>` : ""}
       ${item.lat && item.lon ? `<a href="#" onclick="rotaAtual(${item.lat},${item.lon}); return false;">🚶 Como chegar</a>` : ""}
     </div>
@@ -97,16 +113,13 @@ function renderAgenda(filtered) {
     return;
   }
 
-  // Agrupar por data
   const agrupadoPorData = {};
-
   filtered.forEach(item => {
     if (!agrupadoPorData[item.date]) agrupadoPorData[item.date] = [];
     agrupadoPorData[item.date].push(item);
   });
 
   Object.entries(agrupadoPorData).forEach(([data, eventos]) => {
-    // Cabeçalho da data
     const dataHeader = document.createElement("h2");
     const dataFormatada = new Date(data).toLocaleDateString("pt-PT", {
       weekday: "long", day: "2-digit", month: "long", year: "numeric"
@@ -114,7 +127,6 @@ function renderAgenda(filtered) {
     dataHeader.textContent = `📅 ${dataFormatada}`;
     agendaDiv.appendChild(dataHeader);
 
-    // Agrupar por períodos (manhã, tarde, noite, sem hora)
     const grupos = {
       "☀️ Manhã": [],
       "🌤️ Tarde": [],
@@ -136,7 +148,6 @@ function renderAgenda(filtered) {
       else grupos["🌙 Noite"].push(item);
     });
 
-    // Renderizar cada grupo ordenado por hora
     for (const [periodo, lista] of Object.entries(grupos)) {
       if (lista.length === 0) continue;
 
@@ -171,48 +182,56 @@ function renderMap(filtered) {
     if (item.lat && item.lon) {
       const popupParts = [];
 
-      popupParts.push(`<strong style="color:#0077cc;">${item.title || "(sem título)"}</strong>`);
+      popupParts.push(`<strong style="color:${corParaTipo(item.type)};">${item.title || "(sem título)"}</strong>`);
 
-      if (item.type) {
-        popupParts.push(`<div style="margin-top:4px;"><span style="background:#0077cc;color:white;padding:2px 6px;border-radius:4px;font-size:0.75rem;">${item.type}</span></div>`);
-      }
+      if (item.type) popupParts.push(`<div><span style="background:${corParaTipo(item.type)};color:white;padding:2px 6px;border-radius:4px;font-size:0.75rem;">${item.type}</span></div>`);
+      if (item.area) popupParts.push(`<div style="font-size:0.8rem;color:#555;">${item.area}</div>`);
+      if (item.time_start || item.time_end) popupParts.push(`<div><small>🕒 ${item.time_start || ""}–${item.time_end || ""}</small></div>`);
+      if (item.notes) popupParts.push(`<div style="margin-top:4px;font-size:0.85rem;">📝 ${item.notes}</div>`);
+      if (item.address) popupParts.push(`<div style="font-size:0.85rem;">📍 ${item.address}</div>`);
+      if (item.lat && item.lon) popupParts.push(`<div style="margin-top:6px;"><a href="https://www.google.com/maps/dir/?api=1&destination=${item.lat},${item.lon}" target="_blank" style="text-decoration:none;color:${corParaTipo(item.type)};">🚶 Como chegar</a></div>`);
 
-      if (item.area) {
-        popupParts.push(`<div style="font-size:0.8rem;color:#555;">${item.area}</div>`);
-      }
+      const marker = L.circleMarker([item.lat, item.lon], {
+        radius: 8,
+        fillColor: corParaTipo(item.type),
+        color: "#222",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.9
+      }).bindPopup(popupParts.join(""));
 
-      if (item.time_start || item.time_end) {
-        popupParts.push(`<div style="margin-top:4px;"><small>🕒 ${item.time_start || ""}–${item.time_end || ""}</small></div>`);
-      }
-
-      if (item.notes) {
-        popupParts.push(`<div style="margin-top:4px;font-size:0.85rem;">📝 ${item.notes}</div>`);
-      }
-
-      if (item.address) {
-        popupParts.push(`<div style="font-size:0.85rem;">📍 ${item.address}</div>`);
-      }
-
-      if (item.lat && item.lon) {
-        popupParts.push(`<div style="margin-top:6px;"><a href="https://www.google.com/maps/dir/?api=1&destination=${item.lat},${item.lon}" target="_blank" style="text-decoration:none;color:#0077cc;">🚶 Como chegar</a></div>`);
-      }
-
-      const marker = L.marker([item.lat, item.lon])
-        .bindPopup(popupParts.join(""));
       layerGroup.addLayer(marker);
-
       bounds.push([item.lat, item.lon]);
     }
 
     if (item.lat_from && item.lon_from && item.lat_to && item.lon_to) {
       const coords = [[item.lat_from, item.lon_from], [item.lat_to, item.lon_to]];
-      L.polyline(coords, { color: "#555" }).addTo(layerGroup);
+      L.polyline(coords, {
+        color: corParaTipo(item.type),
+        weight: 3,
+        opacity: 0.7,
+        dashArray: "4,6"
+      }).addTo(layerGroup);
       bounds.push(...coords);
     }
   });
 
   if (bounds.length > 0) {
     map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
+  }
+
+  if (!map.legendControl) {
+    const legend = L.control({ position: "bottomright" });
+    legend.onAdd = function () {
+      const div = L.DomUtil.create("div", "info legend");
+      div.innerHTML = "<strong>Legenda</strong><br>";
+      for (const [tipo, cor] of Object.entries(tipoCores)) {
+        div.innerHTML += `<i style="background:${cor};border-radius:50%;width:10px;height:10px;display:inline-block;margin-right:6px;"></i> ${tipo}<br>`;
+      }
+      return div;
+    };
+    legend.addTo(map);
+    map.legendControl = legend;
   }
 }
 

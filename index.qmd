@@ -1,5 +1,5 @@
 ---
-title: "Itinerário"
+title: ""
 format:
   html:
     theme: cosmo
