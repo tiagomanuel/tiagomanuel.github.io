@@ -182,27 +182,58 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsivo */
+
+/* Versão desktop */
+.agenda-container {
+  width: 40%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.agenda {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  background: #fff;
+  border-right: 1px solid #ddd;
+}
+
+.map-container {
+  flex: 1;
+  height: 100%;
+}
+.map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Responsivo mobile */
 @media (max-width: 768px) {
   .content {
     flex-direction: column;
     height: 100vh;
-    overflow: hidden;
+  }
+
+  .agenda-container {
+    flex: 1 1 55%;
+    height: 55%;
+    max-height: 55%;
   }
 
   .agenda {
-    width: 100%;
-    flex: 1 1 55%;
-    overflow-y: auto;
-    border-right: none;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 0;
     padding: 1rem;
+    overflow-y: auto;
+  }
+
+  .map-container {
+    flex: 1 1 45%;
+    height: 45%;
+    max-height: 45%;
   }
 
   .map {
-    flex: 1 1 45%;
-    min-height: 200px;
+    height: 100%;
     padding: 0;
   }
 }

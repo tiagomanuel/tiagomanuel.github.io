@@ -38,11 +38,14 @@ include-in-header:
     </div>
   </header>
 
-  <!-- Conteúdo principal -->
-  <main class="content">
+<main class="content">
+  <div class="agenda-container">
     <div id="agenda" class="agenda"></div>
+  </div>
+  <div class="map-container">
     <div id="map" class="map"></div>
-  </main>
+  </div>
+</main>
 
 </div>
 
