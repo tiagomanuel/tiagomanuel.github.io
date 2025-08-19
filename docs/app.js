@@ -1,5 +1,3 @@
-// === app.js ===
-
 let state = {
   data: [],
   currentDate: null,
@@ -101,6 +99,17 @@ function criarCard(item) {
     </div>
   `;
 
+  card.onclick = () => {
+    if (item.lat && item.lon) {
+      map.setView([item.lat, item.lon], 15);
+      layerGroup.eachLayer(layer => {
+        if (layer.getLatLng && layer.getLatLng().lat === item.lat && layer.getLatLng().lng === item.lon) {
+          layer.openPopup();
+        }
+      });
+    }
+  };
+
   return card;
 }
 
@@ -140,7 +149,7 @@ function renderAgenda(filtered) {
         return;
       }
 
-      const [h, m] = item.time_start.split(":").map(n => parseInt(n));
+      const [h, m] = item.time_start.split(":" ).map(n => parseInt(n));
       const minutos = h * 60 + m;
 
       if (minutos < 720) grupos["☀️ Manhã"].push(item);

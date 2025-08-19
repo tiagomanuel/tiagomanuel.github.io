@@ -111,31 +111,32 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-
 <!-- Estilos -->
 <link rel="stylesheet" href="styles.css">
+
+<!-- Leaflet -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <!-- Conteúdo -->
 <div class="site-container">
 
-  <!-- Barra de navegação -->
-  <nav class="navbar">
-    <div class="nav-controls">
-      <button id="prev-day">◀</button>
-      <span id="current-day">Data</span>
-      <button id="next-day">▶</button>
+  <!-- Cabeçalho com Filtros -->
+  <header class="navbar">
+    <div class="nav-row">
+      <button id="prev-day">◀ Dia anterior</button>
+      <h1 id="current-day">Itinerário</h1>
+      <button id="next-day">Dia seguinte ▶</button>
     </div>
-    <div class="nav-filtros">
-      <select id="filter-type" multiple="">
+    <div class="filters">
+      <select id="filter-type">
         <option value="">Todas as categorias</option>
       </select>
-      <select id="filter-area" multiple="">
+      <select id="filter-area">
         <option value="">Todas as regiões</option>
       </select>
     </div>
-  </nav>
+  </header>
 
   <!-- Conteúdo principal -->
   <main class="content">
@@ -145,6 +146,7 @@ ul.task-list li input[type="checkbox"] {
 
 </div>
 
+<!-- JS -->
 <script src="app.js"></script>
 
 
